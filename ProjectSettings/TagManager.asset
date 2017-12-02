@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2509324595
+    locked: 0
+  - name: Cloud
+    uniqueID: 2056040155
+    locked: 0
+  - name: Tower
+    uniqueID: 2462019473
+    locked: 0
+  - name: Roadside_Behind
+    uniqueID: 3644668251
+    locked: 0
+  - name: Road
+    uniqueID: 113235617
+    locked: 0
+  - name: Car
+    uniqueID: 775803307
+    locked: 0
