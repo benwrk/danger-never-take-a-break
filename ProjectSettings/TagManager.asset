@@ -38,9 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 2509324595
     locked: 0
@@ -58,4 +55,7 @@ TagManager:
     locked: 0
   - name: Car
     uniqueID: 775803307
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
