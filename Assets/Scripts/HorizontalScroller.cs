@@ -12,11 +12,11 @@ public class HorizontalScroller : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _scrollVelocityVector = new Vector2(GameController.Instance.GameSpeed * SpeedMultiplier, 0);
     }
 
     void Update()
     {
+        _scrollVelocityVector = new Vector2(GameController.Instance.GetEffectiveGameSpeed() * SpeedMultiplier, 0);
         _rigidBody.velocity = GameController.Instance.State == GameController.GameState.Active ? _scrollVelocityVector : Vector2.zero;
     }
 }

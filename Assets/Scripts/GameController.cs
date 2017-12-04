@@ -8,10 +8,17 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     public float GameLength = 150.00f;
-    public float TimeScoreMultiplier = 100.0f;
+    public float ScoreMultiplier = 100.0f;
     public float GameSpeed = 6.0f;
     public float DifficultyMultiplier = 1.0f;
     public float AccelerationMultiplier = 1.5f;
+    public float LengthDifficultyMaxMultiplier = 0.5f;
+    public float QuestionInterval = 10.0f;
+    public float QuestionTime = 10.0f;
+    public float WrongPenalty = 40f;
+
+    private float _timeSinceLastQuestion;
+    public float TimeLeftToAnswer;
 
     public float HpLeft;
     public float Score;
@@ -22,13 +29,15 @@ public class GameController : MonoBehaviour
     public GameObject GameOverCanvas;
     public GameObject ActiveCanvas;
     public GameObject PauseCanvas;
+    public GameObject QuestionCanvas;
 
     public enum GameState
     {
         PreGame,
         Paused,
         Active,
-        GameOver
+        GameOver,
+        Question
     }
 
     public enum CState
@@ -55,6 +64,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(GetEffectiveGameSpeed());
         switch (State)
         {
             case GameState.Active:
@@ -67,9 +77,26 @@ public class GameController : MonoBehaviour
                     ActiveCanvas.SetActive(false);
                     State = GameState.Paused;
                 }
+                
                 CarState = (Input.GetKey(KeyCode.W) || Input.GetKey("joystick 1 button 3"))
                     ? CState.Accelerating
                     : CState.Idle;
+
+                _timeSinceLastQuestion += Time.deltaTime * GetEffectiveGameSpeed() / 15f;
+
+                if (_timeSinceLastQuestion >= QuestionInterval)
+                {
+                    _timeSinceLastQuestion = 0f;
+                    TimeLeftToAnswer = QuestionTime;
+                    State = GameState.Question;
+                    ActiveCanvas.SetActive(false);
+                }
+
+                if (HpLeft <= 0f)
+                {
+                    ActiveCanvas.SetActive(false);
+                    State = GameState.GameOver;
+                }
                 break;
             case GameState.PreGame:
                 PreGameCanvas.SetActive(true);
@@ -100,17 +127,52 @@ public class GameController : MonoBehaviour
                     PauseCanvas.SetActive(false);
                 }
                 break;
+            case GameState.Question:
+                QuestionCanvas.SetActive(true);
+                TimeLeftToAnswer -= Time.deltaTime;
+                if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp("joystick 1 button 6"))
+                {
+                    State = GameState.Active;
+                    QuestionCanvas.SetActive(false);
+                    //TODO: FIX THIS
+                    //Score += TimeLeftToAnswer * ScoreMultiplier;
+                }
+                if (TimeLeftToAnswer <= 0f)
+                {
+                    HpLeft -= WrongPenalty;
+                    State = GameState.Active;
+                    QuestionCanvas.SetActive(false);
+                }
+                if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp("joystick 1 button 7"))
+                {
+                    HpLeft -= WrongPenalty;
+                    State = GameState.Active;
+                    QuestionCanvas.SetActive(false);
+                }
+                if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp("joystick 1 button 4"))
+                {
+                    HpLeft -= WrongPenalty;
+                    State = GameState.Active;
+                    QuestionCanvas.SetActive(false);
+                }
+                if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp("joystick 1 button 5"))
+                {
+                    HpLeft -= WrongPenalty;
+                    State = GameState.Active;
+                    QuestionCanvas.SetActive(false);
+                }
+                break;
         }
     }
 
     public float GetEffectiveGameSpeed()
     {
-        return GameSpeed * DifficultyMultiplier * AccelerationMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
+        return GameSpeed * (DifficultyMultiplier + DifficultyMultiplier * LengthDifficultyMaxMultiplier) * AccelerationMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
     }
 
     private void AddScore()
     {
-        Score += Time.deltaTime * DifficultyMultiplier * TimeScoreMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
+        Score += Time.deltaTime * GetEffectiveGameSpeed() * ScoreMultiplier;
     }
 
     public void Restart()
