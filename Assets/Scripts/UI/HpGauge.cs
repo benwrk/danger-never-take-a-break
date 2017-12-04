@@ -2,7 +2,7 @@
 
 namespace UI
 {
-    public class TimerGauge : MonoBehaviour
+    public class HpGauge : MonoBehaviour
     {
         private float _originalX;
         // Use this for initialization
@@ -14,7 +14,7 @@ namespace UI
         // Update is called once per frame
         void Update()
         {
-            transform.localScale = new Vector3(_originalX * (GameController.Instance.TimeLeft / GameController.GameTime), transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(_originalX * (GameController.Instance.HpLeft / GameController.Instance.GameLength), transform.localScale.y, transform.localScale.z);
             Debug.Log(_originalX + " | " + transform.localScale);
         }
     }

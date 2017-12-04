@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-
-    private bool _isActive;
     private Animator _animator;
 
 	// Use this for initialization
 	void Start ()
 	{
-	    _isActive = true;
 	    _animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if (_isActive)
+	    if (GameController.Instance.State == GameController.GameState.Active)
 	    {
-	        if (Input.GetKey(KeyCode.W))
+	        if (Input.GetKey(KeyCode.W) || Input.GetKey("joystick 1 button 3"))
 	        {
 	            _animator.SetBool("IsAccelerating", true);
 	        }

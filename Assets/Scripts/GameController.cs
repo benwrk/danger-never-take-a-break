@@ -5,21 +5,25 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public const float GameTime = 150.00f;
-    public const float TimeScoreMultiplier = 100.0f;
     public static GameController Instance;
 
+    public float GameLength = 150.00f;
+    public float TimeScoreMultiplier = 100.0f;
     public float GameSpeed = 6.0f;
     public float DifficultyMultiplier = 1.0f;
 
-    public float TimeLeft;
+    public float HpLeft;
+    public float Score;
     public GameState State;
 
-    public float Score;
+    public Canvas PreGameCanvas;
+    public Canvas GameOverCanvas;
+    public Canvas ActiveCanvas;
+    public Canvas PauseCanvas;
 
     public enum GameState
     {
-        NotStarted,
+        PreGame,
         Paused,
         Active,
         Over
@@ -35,7 +39,6 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        ResetCounters();
     }
 
     // Update is called once per frame
@@ -45,34 +48,34 @@ public class GameController : MonoBehaviour
         switch (State)
         {
             case GameState.Active:
-                TimeLeft -= Time.deltaTime;
+                HpLeft -= Time.deltaTime;
                 Score += Time.deltaTime * DifficultyMultiplier * TimeScoreMultiplier;
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
                 {
-                    Pause();
+                    State = GameState.Paused;
                 }
                 break;
-            case GameState.NotStarted:
+            case GameState.PreGame:
+                if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
+                {
+                    Restart();
+                    State = GameState.Active;
+                }
                 break;
             case GameState.Over:
+                if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
+                {
+                    Restart();
+                    State = GameState.Active;
+                }
                 break;
             case GameState.Paused:
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
                 {
-                    Resume();
+                    State = GameState.Active;
                 }
                 break;
         }
-    }
-
-    private void Resume()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void Pause()
-    {
-        throw new System.NotImplementedException();
     }
 
     public float GetEffectiveGameSpeed()
@@ -80,19 +83,9 @@ public class GameController : MonoBehaviour
         return GameSpeed * DifficultyMultiplier;
     }
 
-
-    private void StartGame()
-    {
-        ResetCounters();
-    }
-
-    private void ResetCounters()
-    {
-        TimeLeft = GameTime;
-        Score = 0;
-    }
-
     public void Restart()
     {
+        HpLeft = GameLength;
+        Score = 0;
     }
 }
