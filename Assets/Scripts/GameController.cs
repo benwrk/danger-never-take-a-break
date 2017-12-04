@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public const float GameTime = 150.00f;
-    public const float TimeScoreMultiplier = 1.0f;
+    public const float TimeScoreMultiplier = 100.0f;
     public static GameController Instance;
 
     public float GameSpeed = 6.0f;
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         {
             case GameState.Active:
                 TimeLeft -= Time.deltaTime;
-                Score += Time.deltaTime * DifficultyMultiplier;
+                Score += Time.deltaTime * DifficultyMultiplier * TimeScoreMultiplier;
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
                 {
                     Pause();
