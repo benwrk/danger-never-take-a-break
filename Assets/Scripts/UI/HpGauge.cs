@@ -15,7 +15,6 @@ namespace UI
         void Update()
         {
             transform.localScale = new Vector3(_originalX * (GameController.Instance.HpLeft / GameController.Instance.GameLength), transform.localScale.y, transform.localScale.z);
-            Debug.Log(_originalX + " | " + transform.localScale);
         }
     }
 }

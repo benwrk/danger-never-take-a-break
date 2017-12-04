@@ -11,22 +11,32 @@ public class GameController : MonoBehaviour
     public float TimeScoreMultiplier = 100.0f;
     public float GameSpeed = 6.0f;
     public float DifficultyMultiplier = 1.0f;
+    public float AccelerationMultiplier = 1.5f;
 
     public float HpLeft;
     public float Score;
     public GameState State;
+    public CState CarState;
 
-    public Canvas PreGameCanvas;
-    public Canvas GameOverCanvas;
-    public Canvas ActiveCanvas;
-    public Canvas PauseCanvas;
+    public GameObject PreGameCanvas;
+    public GameObject GameOverCanvas;
+    public GameObject ActiveCanvas;
+    public GameObject PauseCanvas;
 
     public enum GameState
     {
         PreGame,
         Paused,
         Active,
-        Over
+        GameOver
+    }
+
+    public enum CState
+    {
+        Stop,
+        Idle,
+        Accelerating,
+        Damaged
     }
 
     void Awake()
@@ -48,31 +58,46 @@ public class GameController : MonoBehaviour
         switch (State)
         {
             case GameState.Active:
+                ActiveCanvas.SetActive(true);
                 HpLeft -= Time.deltaTime;
-                Score += Time.deltaTime * DifficultyMultiplier * TimeScoreMultiplier;
+                AddScore();
+
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
                 {
+                    ActiveCanvas.SetActive(false);
                     State = GameState.Paused;
                 }
+                CarState = (Input.GetKey(KeyCode.W) || Input.GetKey("joystick 1 button 3"))
+                    ? CState.Accelerating
+                    : CState.Idle;
                 break;
             case GameState.PreGame:
+                PreGameCanvas.SetActive(true);
+                CarState = CState.Stop;
                 if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
                 {
+                    PreGameCanvas.SetActive(false);
                     Restart();
                     State = GameState.Active;
                 }
                 break;
-            case GameState.Over:
+            case GameState.GameOver:
+                GameOverCanvas.SetActive(true);
+                CarState = CState.Damaged;
                 if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
                 {
                     Restart();
                     State = GameState.Active;
+                    GameOverCanvas.SetActive(false);
                 }
                 break;
             case GameState.Paused:
+                PauseCanvas.SetActive(true);
+                CarState = CState.Stop;
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
                 {
                     State = GameState.Active;
+                    PauseCanvas.SetActive(false);
                 }
                 break;
         }
@@ -80,7 +105,12 @@ public class GameController : MonoBehaviour
 
     public float GetEffectiveGameSpeed()
     {
-        return GameSpeed * DifficultyMultiplier;
+        return GameSpeed * DifficultyMultiplier * AccelerationMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
+    }
+
+    private void AddScore()
+    {
+        Score += Time.deltaTime * DifficultyMultiplier * TimeScoreMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
     }
 
     public void Restart()
