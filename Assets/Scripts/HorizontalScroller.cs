@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HorizontalScroller : MonoBehaviour
 {
@@ -16,7 +14,6 @@ public class HorizontalScroller : MonoBehaviour
 
     void Update()
     {
-        _scrollVelocityVector = new Vector2(GameController.Instance.GetEffectiveGameSpeed() * SpeedMultiplier, 0);
-        _rigidBody.velocity = GameController.Instance.State == GameController.GameState.Active ? _scrollVelocityVector : Vector2.zero;
+        _rigidBody.velocity = new Vector2(GameController.Instance.GetEffectiveGameSpeed() * SpeedMultiplier, 0);
     }
 }

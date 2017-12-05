@@ -42,7 +42,6 @@ public class RoadsidePrefabPool : MonoBehaviour
     {
         _timeSinceLastSpawned += Time.deltaTime;
         var spr = 10 * SpawnRate /(GameController.Instance.GetEffectiveGameSpeed() / GameController.Instance.GameSpeed);
-        Debug.Log("spr: " + spr);
 
         if (GameController.Instance.State == GameController.GameState.Active && _timeSinceLastSpawned >= spr)
         {

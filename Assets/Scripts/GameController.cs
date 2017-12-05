@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
@@ -64,7 +61,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GetEffectiveGameSpeed());
         switch (State)
         {
             case GameState.Active:
@@ -77,7 +73,7 @@ public class GameController : MonoBehaviour
                     ActiveCanvas.SetActive(false);
                     State = GameState.Paused;
                 }
-                
+
                 CarState = (Input.GetKey(KeyCode.W) || Input.GetKey("joystick 1 button 3"))
                     ? CState.Accelerating
                     : CState.Idle;
@@ -167,7 +163,9 @@ public class GameController : MonoBehaviour
 
     public float GetEffectiveGameSpeed()
     {
-        return GameSpeed * (DifficultyMultiplier + DifficultyMultiplier * LengthDifficultyMaxMultiplier) * AccelerationMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f);
+        return GameSpeed * (DifficultyMultiplier + DifficultyMultiplier * LengthDifficultyMaxMultiplier) *
+               AccelerationMultiplier * (CarState == CState.Accelerating ? AccelerationMultiplier : 1f) *
+               (State == GameState.Active ? 1f : 0f);
     }
 
     private void AddScore()
