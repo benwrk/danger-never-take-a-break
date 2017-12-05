@@ -136,6 +136,7 @@ public class GameController : MonoBehaviour
                 if (HpLeft <= 0f)
                 {
                     ActiveCanvas.SetActive(false);
+                    SfxController.Instance.PlayGameOverSfx();
                     CurrentGameState = GameState.GameOver;
                 }
                 break;
@@ -198,6 +199,7 @@ public class GameController : MonoBehaviour
         _unusedQuestions.AddRange(Question.QuestionList2);
         QuestionsAnsweredCorrectly = 0;
         QuestionsAnswered = 0;
+        SfxController.Instance.PlayStartSfx();
     }
 
     public Question GetQuestion()
@@ -221,10 +223,12 @@ public class GameController : MonoBehaviour
         {
             Score += TimeLeftToAnswer * QuestionRewardMultiplier + QuestionRewardMultiplier;
             QuestionsAnsweredCorrectly++;
+            SfxController.Instance.PlayCorrectAnswerSfx();
         }
         else
         {
             HpLeft -= QuestionPenalty;
+            SfxController.Instance.PlayIncorectAnswerSfx();
         }
         CurrentGameState = GameState.Active;
         QuestionCanvas.SetActive(false);
