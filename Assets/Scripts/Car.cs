@@ -4,13 +4,11 @@ public class Car : MonoBehaviour
 {
     private Animator _animator;
 
-    // Use this for initialization
     private void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         _animator.SetBool("IsAccelerating",

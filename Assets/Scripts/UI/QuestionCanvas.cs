@@ -24,7 +24,6 @@ namespace UI
             _questionUsed = true;
         }
 
-        // Update is called once per frame
         private void Update()
         {
             if (_questionUsed)
@@ -56,6 +55,11 @@ namespace UI
                 ChoiceTexts[i].text = _currentQuestion.Choices[i];
         }
 
+        /// <summary>
+        ///     Handle the action of answering a question.
+        ///     Needs to be public to be callable from Unity UI buttons!
+        /// </summary>
+        /// <param name="choiceNumber">0-indexed number of selected choice</param>
         public void HandleAnswer(int choiceNumber)
         {
             if (_imageActivated)
@@ -63,12 +67,6 @@ namespace UI
                 _activeImage.SetActive(false);
                 _imageActivated = false;
             }
-            //{
-            //    QuestionImages[_currentQuestion.QuestionNumber - 1].GetComponent<SpriteRenderer>().enabled = false;
-            //    Debug.Log("Setting Question Q" + _currentQuestion.QuestionNumber + " | " +
-            //              QuestionImages[_currentQuestion.QuestionNumber].name + " | " +
-            //              QuestionImages[_currentQuestion.QuestionNumber].activeSelf);
-            //}
             GameController.Instance.QuestionAnswered(choiceNumber - 1 == _currentQuestion.CorrectChoiceIndex);
             _questionUsed = true;
         }

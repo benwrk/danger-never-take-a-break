@@ -6,13 +6,11 @@ namespace UI
     {
         private float _originalX;
 
-        // Use this for initialization
         private void Start()
         {
             _originalX = transform.localScale.x;
         }
 
-        // Update is called once per frame
         private void Update()
         {
             transform.localScale =

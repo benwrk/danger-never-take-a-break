@@ -31,7 +31,6 @@ public class ObjectPoolSpawner : MonoBehaviour
 
     public float SpawnX;
 
-    // Use this for initialization
     private void Awake()
     {
         _parentTransform = GetComponent<Transform>();
@@ -41,7 +40,6 @@ public class ObjectPoolSpawner : MonoBehaviour
                 _objectPool.Add(Instantiate(prefab, _poolLocation, Quaternion.identity, _parentTransform));
     }
 
-    // Update is called once per frame
     private void Update()
     {
         _timeSinceLastSpawn += GameController.Instance.GetEffectiveGameSpeed() * Time.deltaTime;

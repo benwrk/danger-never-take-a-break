@@ -47,7 +47,6 @@ public class BgmController : MonoBehaviour
                     AcceleratingBgm.pitch = 1.2f;
                     PlaySolo(AcceleratingBgm);
                 }
-                //PlaySolo(GameController.Instance.CurrentCarState == GameController.CarState.Accelerating ? AcceleratingBgm : ActiveBgm);
                 break;
             case GameController.GameState.PreGame:
             case GameController.GameState.Paused:

@@ -23,7 +23,6 @@ namespace UI
             };
         }
 
-        // Update is called once per frame
         private void Update()
         {
             switch (GameController.Instance.CurrentAccelerateKey)
@@ -50,9 +49,7 @@ namespace UI
         private void HighlightKey(SpriteRenderer soloKeyIndicator)
         {
             _keys.ForEach(k =>
-            {
-                k.color = k == soloKeyIndicator ? new Color(1f, 1f, 1f, 0.9f) : new Color(0.5f, 0.5f, 0.5f, 0.5f);
-            });
+                k.color = k == soloKeyIndicator ? new Color(1f, 1f, 1f, 0.9f) : new Color(0.5f, 0.5f, 0.5f, 0.5f));
         }
     }
 }
