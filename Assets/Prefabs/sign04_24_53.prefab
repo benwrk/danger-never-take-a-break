@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114357607073452046}
   - component: {fileID: 50813451398744270}
   - component: {fileID: 61760176643615896}
+  - component: {fileID: 114220806417837772}
   m_Layer: 0
   m_Name: sign04_24_53
   m_TagString: Untagged
@@ -88,6 +89,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.9}
   m_EdgeRadius: 0
+--- !u!114 &114220806417837772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852165622716440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114ccdfe22afe5c4db85dfd61dd786e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114357607073452046
 MonoBehaviour:
   m_ObjectHideFlags: 1

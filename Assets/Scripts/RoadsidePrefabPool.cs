@@ -20,7 +20,7 @@ public class RoadsidePrefabPool : MonoBehaviour
     private float _timeSinceLastSpawned;
 
 
-    void Start()
+    private void Start()
     {
         _timeSinceLastSpawned = 0f;
 
@@ -38,7 +38,7 @@ public class RoadsidePrefabPool : MonoBehaviour
 
 
     //This spawns roadsidePrefabs as long as the game is not over.
-    void Update()
+    private void Update()
     {
         _timeSinceLastSpawned += Time.deltaTime;
         var spr = 10 * SpawnRate /(GameController.Instance.GetEffectiveGameSpeed() / GameController.Instance.GameSpeed);

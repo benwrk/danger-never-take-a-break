@@ -32,7 +32,7 @@ public class CloudObjectPool : MonoBehaviour
     public bool RandomXFlip;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         _parentTransform = GetComponent<Transform>();
         _objectPool = new List<GameObject>();
@@ -46,11 +46,9 @@ public class CloudObjectPool : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         _timeSinceLastSpawn += GameController.Instance.GetEffectiveGameSpeed() * Time.deltaTime;
-        Debug.Log(_timeSinceLastSpawn);
-
         if (_timeSinceLastSpawn > SpawnInterval)
         {
             Spawn();

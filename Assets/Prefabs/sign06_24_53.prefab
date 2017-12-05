@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114919969270330140}
   - component: {fileID: 50411768763781670}
   - component: {fileID: 61519302543788386}
+  - component: {fileID: 114932474950927294}
   m_Layer: 0
   m_Name: sign06_24_53
   m_TagString: Untagged
@@ -100,6 +101,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMultiplier: -0.9
+--- !u!114 &114932474950927294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258165662311164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114ccdfe22afe5c4db85dfd61dd786e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212042746877083040
 SpriteRenderer:
   m_ObjectHideFlags: 1

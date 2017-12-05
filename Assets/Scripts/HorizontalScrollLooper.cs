@@ -5,7 +5,7 @@ public class HorizontalScrollLooper : MonoBehaviour
 {
     public bool RandomXFlip;
 
-    void Update()
+    private void Update()
     {
         float width = GetComponent<SpriteRenderer>().bounds.size.x;
         if (transform.position.x < -width)

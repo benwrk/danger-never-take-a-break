@@ -2,7 +2,7 @@
 
 public class CustomInputController: MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         if (Input.GetKey("joystick 1 button 0"))
         {

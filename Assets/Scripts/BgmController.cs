@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BgmController : MonoBehaviour
 {
+    public BgmController Instance;
+
     public AudioSource PreGameBgm;
 
     public AudioSource ActiveBgm;
@@ -15,8 +17,19 @@ public class BgmController : MonoBehaviour
 
     private List<AudioSource> _bgmList;
 
-    // Use this for initialization
-    void Start()
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
     {
         _bgmList = new List<AudioSource>
         {
@@ -28,8 +41,7 @@ public class BgmController : MonoBehaviour
         };
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (GameController.Instance.State)
         {
@@ -49,7 +61,7 @@ public class BgmController : MonoBehaviour
         }
     }
 
-    void PlaySolo(AudioSource soloSource)
+    private void PlaySolo(AudioSource soloSource)
     {
         foreach (var source in _bgmList)
         {
