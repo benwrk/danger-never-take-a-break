@@ -172,7 +172,7 @@ public class GameController : MonoBehaviour
     {
         if (isCorrectAnswer)
         {
-            Score += TimeLeftToAnswer * QuestionRewardMultiplier;
+            Score += TimeLeftToAnswer * QuestionRewardMultiplier + QuestionRewardMultiplier;
         }
         else
         {

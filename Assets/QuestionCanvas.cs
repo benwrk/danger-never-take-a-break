@@ -30,19 +30,19 @@ public class QuestionCanvas : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp("joystick 1 button 6"))
             {
-                HandleAnswer(0);
+                HandleAnswer(1);
             }
             if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp("joystick 1 button 7"))
             {
-                HandleAnswer(1);
+                HandleAnswer(2);
             }
             if (Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp("joystick 1 button 4"))
             {
-                HandleAnswer(2);
+                HandleAnswer(3);
             }
             if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp("joystick 1 button 5"))
             {
-                HandleAnswer(3);
+                HandleAnswer(4);
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CloudObjectPool : MonoBehaviour
+public class ObjectPoolSpawner : MonoBehaviour
 {
     private readonly Vector2 _poolLocation = new Vector2(0f, -100f);
 
@@ -13,7 +13,7 @@ public class CloudObjectPool : MonoBehaviour
 
     private int _lastSpawnedIndex;
 
-    public List<GameObject> CloudPrefabs;
+    public List<GameObject> Prefabs;
 
     public float MaxSpawnY;
 
@@ -32,13 +32,13 @@ public class CloudObjectPool : MonoBehaviour
     public bool RandomXFlip;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
         _parentTransform = GetComponent<Transform>();
         _objectPool = new List<GameObject>();
         for (var i = 0; i < PoolSizeMultiplier; i++)
         {
-            foreach (var prefab in CloudPrefabs)
+            foreach (var prefab in Prefabs)
             {
                 _objectPool.Add(Instantiate(prefab, _poolLocation, Quaternion.identity, _parentTransform));
             }
@@ -61,7 +61,7 @@ public class CloudObjectPool : MonoBehaviour
         _timeSinceLastSpawn = 0;
         _lastSpawnedIndex = _lastSpawnedIndex + 1 >= _objectPool.Count ? 0 : _lastSpawnedIndex + 1;
 
-        var flipScale = (RandomXFlip && Random.Range(0, 2) > 0) ? -1f : 1f;
+        var flipScale = RandomXFlip && Random.Range(0, 2) > 0 ? -1f : 1f;
         var randomScale = Random.Range(MinScale, MaxScale);
 
         go.transform.position = new Vector3(SpawnX, Random.Range(MinSpawnY, MaxSpawnY), go.transform.position.z);
