@@ -5,31 +5,31 @@ public class ObjectPoolSpawner : MonoBehaviour
 {
     private readonly Vector2 _poolLocation = new Vector2(0f, -100f);
 
+    private int _lastSpawnedIndex;
+
+    private List<GameObject> _objectPool;
+
     private Transform _parentTransform;
 
     private float _timeSinceLastSpawn;
 
-    private List<GameObject> _objectPool;
-
-    private int _lastSpawnedIndex;
-
-    public List<GameObject> Prefabs;
+    public float MaxScale;
 
     public float MaxSpawnY;
 
-    public float MinSpawnY;
-
-    public float MaxScale;
-
     public float MinScale;
 
-    public float SpawnX;
-
-    public float SpawnInterval = 8f;
+    public float MinSpawnY;
 
     public uint PoolSizeMultiplier = 1;
 
+    public List<GameObject> Prefabs;
+
     public bool RandomXFlip;
+
+    public float SpawnInterval = 8f;
+
+    public float SpawnX;
 
     // Use this for initialization
     private void Awake()
@@ -37,12 +37,8 @@ public class ObjectPoolSpawner : MonoBehaviour
         _parentTransform = GetComponent<Transform>();
         _objectPool = new List<GameObject>();
         for (var i = 0; i < PoolSizeMultiplier; i++)
-        {
             foreach (var prefab in Prefabs)
-            {
                 _objectPool.Add(Instantiate(prefab, _poolLocation, Quaternion.identity, _parentTransform));
-            }
-        }
     }
 
     // Update is called once per frame
@@ -50,9 +46,7 @@ public class ObjectPoolSpawner : MonoBehaviour
     {
         _timeSinceLastSpawn += GameController.Instance.GetEffectiveGameSpeed() * Time.deltaTime;
         if (_timeSinceLastSpawn > SpawnInterval)
-        {
             Spawn();
-        }
     }
 
     private void Spawn()

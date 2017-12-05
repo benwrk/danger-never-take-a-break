@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestionAnsweredText : MonoBehaviour
+namespace UI
 {
-    void Update()
+    public class QuestionAnsweredText : MonoBehaviour
     {
-        GetComponent<Text>().text = GameController.Instance.QuestionsAnsweredCorrectly + "/" +
-                                    GameController.Instance.QuestionsAnswered;
+        private void Update()
+        {
+            GetComponent<Text>().text = GameController.Instance.QuestionsAnsweredCorrectly + "/" +
+                                        GameController.Instance.QuestionsAnswered;
+        }
     }
 }

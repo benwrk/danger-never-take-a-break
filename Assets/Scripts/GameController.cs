@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public enum AccelerateKey
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
     public enum CarState
     {
         Stop,
@@ -21,18 +29,18 @@ public class GameController : MonoBehaviour
     }
 
     public static GameController Instance;
-
-    public int QuestionsAnswered;
-    public int QuestionsAnsweredCorrectly;
+    private float _currentAccelerateKeyChangeInterval;
 
     private int _gameCounter;
     private float _timeSinceLastAccelerateKeyChange;
     private List<Question> _unusedQuestions;
-    public float AccelerationMultiplier = 1.5f;
-    public GameObject ActiveCanvas;
     public float AccelerateKeyChangeIntervalMax = 12f;
     public float AccelerateKeyChangeIntervalMin = 4f;
+    public float AccelerationMultiplier = 1.5f;
+    public GameObject ActiveCanvas;
+    public AccelerateKey CurrentAccelerateKey;
     public CarState CurrentCarState;
+    public GameState CurrentGameState;
     public float DifficultyMultiplier = 1.0f;
 
     public float GameLength = 150.00f;
@@ -47,23 +55,15 @@ public class GameController : MonoBehaviour
     public GameObject QuestionCanvas;
     public float QuestionPenalty = 40f;
     public float QuestionRewardMultiplier = 1000f;
+
+    public int QuestionsAnswered;
+    public int QuestionsAnsweredCorrectly;
     public float QuestionTime = 10.0f;
     public bool QuestionTriggered;
     public float Score;
-    public GameState CurrentGameState;
 
     public float TimeLeftToAnswer;
     public float TimeScoreMultiplier = 100.0f;
-    public AccelerateKey CurrentAccelerateKey;
-    private float _currentAccelerateKeyChangeInterval;
-
-    public enum AccelerateKey
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
 
     private void Awake()
     {
@@ -90,7 +90,6 @@ public class GameController : MonoBehaviour
                         Random.Range(AccelerateKeyChangeIntervalMin, AccelerateKeyChangeIntervalMax);
                     var previousAccelerateKey = CurrentAccelerateKey;
                     while (CurrentAccelerateKey == previousAccelerateKey)
-                    {
                         CurrentAccelerateKey = Random.value > 0.5
                             ? Random.value > 0.5
                                 ? AccelerateKey.Up
@@ -98,7 +97,6 @@ public class GameController : MonoBehaviour
                             : Random.value > 0.5
                                 ? AccelerateKey.Left
                                 : AccelerateKey.Right;
-                    }
                 }
 
                 var accelerateKeyPressed = false;
@@ -174,9 +172,7 @@ public class GameController : MonoBehaviour
                 QuestionCanvas.SetActive(true);
                 TimeLeftToAnswer -= Time.deltaTime;
                 if (TimeLeftToAnswer <= 0f)
-                {
                     QuestionAnswered(false);
-                }
                 break;
         }
     }
@@ -215,8 +211,6 @@ public class GameController : MonoBehaviour
         var i = Random.Range(0, _unusedQuestions.Count);
         var ret = _unusedQuestions[i];
         _unusedQuestions.RemoveAt(i);
-        //var ret = _unusedQuestions[0];
-        //_unusedQuestions.RemoveAt(0);
         return ret;
     }
 
@@ -229,7 +223,9 @@ public class GameController : MonoBehaviour
             QuestionsAnsweredCorrectly++;
         }
         else
+        {
             HpLeft -= QuestionPenalty;
+        }
         CurrentGameState = GameState.Active;
         QuestionCanvas.SetActive(false);
     }

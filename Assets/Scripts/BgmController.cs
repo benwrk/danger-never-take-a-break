@@ -3,30 +3,21 @@ using UnityEngine;
 
 public class BgmController : MonoBehaviour
 {
+    private List<AudioSource> _bgmList;
+    public AudioSource AcceleratingBgm;
+    public AudioSource ActiveBgm;
+    public AudioSource GameOverBgm;
     public BgmController Instance;
 
     public AudioSource PreGameBgm;
-
-    public AudioSource ActiveBgm;
-
-    public AudioSource GameOverBgm;
-
-    public AudioSource AcceleratingBgm;
-
     public AudioSource QuestionBgm;
-
-    private List<AudioSource> _bgmList;
 
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     private void Start()
@@ -73,22 +64,11 @@ public class BgmController : MonoBehaviour
 
     private void PlaySolo(AudioSource soloSource)
     {
-        foreach (var source in _bgmList)
+        if (!soloSource.isPlaying)
+            soloSource.Play();
+        _bgmList.FindAll(s => s != soloSource).ForEach(s =>
         {
-            if (source == soloSource)
-            {
-                if (!source.isPlaying)
-                {
-                    source.Play();
-                }
-            }
-            else
-            {
-                if (source.isPlaying)
-                {
-                    source.Stop();
-                }
-            }
-        }
+            if (s.isPlaying) s.Stop();
+        });
     }
 }

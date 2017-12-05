@@ -2,9 +2,9 @@
 
 public class HorizontalScroller : MonoBehaviour
 {
-    public float SpeedMultiplier = 1f;
     private Rigidbody2D _rigidBody;
     private Vector2 _scrollVelocityVector;
+    public float SpeedMultiplier = 1f;
 
     // Use this for initialization
     private void Start()
