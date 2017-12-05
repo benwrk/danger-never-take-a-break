@@ -1443,7 +1443,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 209197233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -950, y: 530, z: 0}
+  m_LocalPosition: {x: -40, y: 40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 358376673}
@@ -1518,6 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76911c7a62cde149b80f28ae024be25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentCarColor: 0
   AccelerateKeyChangeIntervalMax: 10
   AccelerateKeyChangeIntervalMin: 2
   AccelerationMultiplier: 5
@@ -1579,7 +1580,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241988324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 940, y: -520, z: 0}
+  m_LocalPosition: {x: 30, y: -30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1684716289}
@@ -2454,7 +2455,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 541011657}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 50, y: 50, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1626482798}
@@ -2744,7 +2745,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 608404681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -520, z: 0}
+  m_LocalPosition: {x: 0, y: -29.999996, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 278011809}
@@ -3523,7 +3524,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 838931301}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 924, y: 526, z: 0}
+  m_LocalPosition: {x: 14, y: 36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1626482798}
@@ -3741,7 +3742,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 887189161}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 50, y: 50, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 86371144}
@@ -4321,8 +4322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CorrectAnswerSfx: {fileID: 1463141822}
   GameOverSfx: {fileID: 1324930052}
-  StartSfx: {fileID: 601219783}
   IncorrectAnswerSfx: {fileID: 1070932015}
+  StartSfx: {fileID: 601219783}
 --- !u!1 &1070932013
 GameObject:
   m_ObjectHideFlags: 0
@@ -5987,6 +5988,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee0e67253e2ca541afe53602a8ccc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlueCarAnimatorController: {fileID: 9100000, guid: ad3c169d1f645d24688991a63702f5fb,
+    type: 2}
+  GreenCarAnimatorController: {fileID: 9100000, guid: 39be25e1be6ebb544ab2e24b18b4839b,
+    type: 2}
+  RedCarAnimatorController: {fileID: 9100000, guid: 30be0a069dff8a1468a89c5f72bf9eea,
+    type: 2}
+  YellowCarAnimatorController: {fileID: 9100000, guid: 60fcf59d58d9bba4cac46ae3255820e2,
+    type: 2}
 --- !u!60 &1499842331
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -7316,7 +7325,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1780972836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 492, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 32, y: 32, z: 1}
   m_Children: []
   m_Father: {fileID: 86371144}

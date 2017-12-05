@@ -8,9 +8,9 @@ public class SfxController : MonoBehaviour
 
     public AudioSource GameOverSfx;
 
-    public AudioSource StartSfx;
-
     public AudioSource IncorrectAnswerSfx;
+
+    public AudioSource StartSfx;
 
     private void Awake()
     {

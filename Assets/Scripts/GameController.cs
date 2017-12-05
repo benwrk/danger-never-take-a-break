@@ -28,6 +28,14 @@ public class GameController : MonoBehaviour
         Question
     }
 
+    public enum CarColor
+    {
+        Blue,
+        Green, Red, Yellow
+    }
+
+    public CarColor CurrentCarColor = CarColor.Blue;
+
     public static GameController Instance;
     private float _currentAccelerateKeyChangeInterval;
 
