@@ -129,7 +129,7 @@ public class GameController : MonoBehaviour
 
                 CurrentCarState = accelerateKeyPressed ? CarState.Accelerating : CarState.Idle;
 
-                if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
+                if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
                 {
                     ActiveCanvas.SetActive(false);
                     CurrentGameState = GameState.Paused;
@@ -191,11 +191,27 @@ public class GameController : MonoBehaviour
                     CurrentGameState = GameState.Active;
                     GameOverCanvas.SetActive(false);
                 }
+                if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp("joystick 1 button 2"))
+                {
+                    CurrentGameState = GameState.PreGame;
+                    GameOverCanvas.SetActive(false);
+                }
                 break;
             case GameState.Paused:
                 PauseCanvas.SetActive(true);
                 CurrentCarState = CarState.Stop;
-                if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
+                if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
+                {
+                    Restart();
+                    CurrentGameState = GameState.Active;
+                    PauseCanvas.SetActive(false);
+                }
+                if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp("joystick 1 button 2"))
+                {
+                    CurrentGameState = GameState.PreGame;
+                    PauseCanvas.SetActive(false);
+                }
+                if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp("joystick 1 button 3"))
                 {
                     CurrentGameState = GameState.Active;
                     PauseCanvas.SetActive(false);
