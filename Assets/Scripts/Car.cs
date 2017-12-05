@@ -13,14 +13,10 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameController.Instance.CurrentCarState == GameController.CarState.Accelerating)
-        {
-            _animator.SetBool("IsAccelerating", true);
-        }
-        else
-        {
-            _animator.SetBool("IsAccelerating", false);
-        }
+        _animator.SetBool("IsAccelerating",
+            GameController.Instance.CurrentCarState == GameController.CarState.Accelerating);
+        _animator.SetBool("IsDamaged", 
+            GameController.Instance.CurrentCarState == GameController.CarState.Damaged);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

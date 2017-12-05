@@ -37,10 +37,6 @@ namespace UI
                     _activeImage = QuestionImages[_currentQuestion.QuestionNumber - 1];
                     _activeImage.SetActive(true);
                     _imageActivated = true;
-
-                    Debug.Log("Setting Question Q" + _currentQuestion.QuestionNumber + " | " +
-                              QuestionImages[_currentQuestion.QuestionNumber].name + " | " +
-                              QuestionImages[_currentQuestion.QuestionNumber].activeSelf);
                 }
             }
             else
@@ -61,7 +57,6 @@ namespace UI
                 {
                     HandleAnswer(4);
                 }
-            
             }
 
             QuestionText.text = _currentQuestion.Text;

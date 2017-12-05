@@ -116,8 +116,6 @@ public class GameController : MonoBehaviour
                         break;
                 }
 
-                Debug.Log(CurrentAccelerateKey);
-
                 CurrentCarState = accelerateKeyPressed ? CarState.Accelerating : CarState.Idle;
 
                 if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp("joystick 1 button 9"))
