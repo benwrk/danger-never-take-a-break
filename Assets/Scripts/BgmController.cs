@@ -43,10 +43,20 @@ public class BgmController : MonoBehaviour
 
     private void Update()
     {
-        switch (GameController.Instance.State)
+        switch (GameController.Instance.CurrentGameState)
         {
             case GameController.GameState.Active:
-                PlaySolo(GameController.Instance.CarState == GameController.CState.Accelerating ? AcceleratingBgm : ActiveBgm);
+                if (GameController.Instance.CurrentCarState == GameController.CarState.Accelerating)
+                {
+                    AcceleratingBgm.pitch = 1.3f;
+                    PlaySolo(AcceleratingBgm);
+                }
+                else
+                {
+                    AcceleratingBgm.pitch = 1.2f;
+                    PlaySolo(AcceleratingBgm);
+                }
+                //PlaySolo(GameController.Instance.CurrentCarState == GameController.CarState.Accelerating ? AcceleratingBgm : ActiveBgm);
                 break;
             case GameController.GameState.PreGame:
             case GameController.GameState.Paused:
