@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance;
 
+    public int QuestionsAnswered;
+    public int QuestionsAnsweredCorrectly;
+
     private int _gameCounter;
     private float _timeSinceLastAccelerateKeyChange;
     private List<Question> _unusedQuestions;
@@ -170,6 +173,10 @@ public class GameController : MonoBehaviour
             case GameState.Question:
                 QuestionCanvas.SetActive(true);
                 TimeLeftToAnswer -= Time.deltaTime;
+                if (TimeLeftToAnswer <= 0f)
+                {
+                    QuestionAnswered(false);
+                }
                 break;
         }
     }
@@ -193,22 +200,34 @@ public class GameController : MonoBehaviour
         _gameCounter++;
         _unusedQuestions = new List<Question>(Question.QuestionList1);
         _unusedQuestions.AddRange(Question.QuestionList2);
+        QuestionsAnsweredCorrectly = 0;
+        QuestionsAnswered = 0;
     }
 
     public Question GetQuestion()
     {
-        //var i = Random.Range(0, _unusedQuestions.Count);
-        //var ret = _unusedQuestions[i];
-        //_unusedQuestions.RemoveAt(i);
-        var ret = _unusedQuestions[0];
-        _unusedQuestions.RemoveAt(0);
+        if (_unusedQuestions.Count <= 0)
+        {
+            QuestionAnswered(true);
+            CurrentGameState = GameState.GameOver;
+            return null;
+        }
+        var i = Random.Range(0, _unusedQuestions.Count);
+        var ret = _unusedQuestions[i];
+        _unusedQuestions.RemoveAt(i);
+        //var ret = _unusedQuestions[0];
+        //_unusedQuestions.RemoveAt(0);
         return ret;
     }
 
     public void QuestionAnswered(bool isCorrectAnswer)
     {
+        QuestionsAnswered++;
         if (isCorrectAnswer)
+        {
             Score += TimeLeftToAnswer * QuestionRewardMultiplier + QuestionRewardMultiplier;
+            QuestionsAnsweredCorrectly++;
+        }
         else
             HpLeft -= QuestionPenalty;
         CurrentGameState = GameState.Active;
