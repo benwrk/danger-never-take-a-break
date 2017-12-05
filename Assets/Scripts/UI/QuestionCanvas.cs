@@ -9,7 +9,13 @@ public class QuestionCanvas : MonoBehaviour
 
     public List<Text> ChoiceTexts;
 
+    public List<GameObject> QuestionImages;
+
     private Question _currentQuestion;
+
+    private GameObject _activeImage;
+
+    private bool _imageActivated;
 
     private bool _questionUsed;
 
@@ -25,6 +31,16 @@ public class QuestionCanvas : MonoBehaviour
         {
             _currentQuestion = GameController.Instance.GetQuestion();
             _questionUsed = false;
+            if (_currentQuestion.QuestionNumber > 0 && _currentQuestion.QuestionNumber < 12)
+            {
+                _activeImage = QuestionImages[_currentQuestion.QuestionNumber - 1];
+                _activeImage.SetActive(true);
+                _imageActivated = true;
+
+                Debug.Log("Setting Question Q" + _currentQuestion.QuestionNumber + " | " +
+                          QuestionImages[_currentQuestion.QuestionNumber].name + " | " +
+                          QuestionImages[_currentQuestion.QuestionNumber].activeSelf);
+            }
         }
         else
         {
@@ -44,6 +60,7 @@ public class QuestionCanvas : MonoBehaviour
             {
                 HandleAnswer(4);
             }
+            
         }
 
         QuestionText.text = _currentQuestion.Text;
@@ -52,11 +69,21 @@ public class QuestionCanvas : MonoBehaviour
         {
             ChoiceTexts[i].text = _currentQuestion.Choices[i];
         }
-
     }
 
     public void HandleAnswer(int choiceNumber)
     {
+        if (_imageActivated)
+        {
+            _activeImage.SetActive(false);
+            _imageActivated = false;
+        }
+        //{
+        //    QuestionImages[_currentQuestion.QuestionNumber - 1].GetComponent<SpriteRenderer>().enabled = false;
+        //    Debug.Log("Setting Question Q" + _currentQuestion.QuestionNumber + " | " +
+        //              QuestionImages[_currentQuestion.QuestionNumber].name + " | " +
+        //              QuestionImages[_currentQuestion.QuestionNumber].activeSelf);
+        //}
         GameController.Instance.QuestionAnswered(choiceNumber - 1 == _currentQuestion.CorrectChoiceIndex);
         _questionUsed = true;
     }

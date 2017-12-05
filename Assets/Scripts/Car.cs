@@ -22,4 +22,12 @@ public class Car : MonoBehaviour
             _animator.SetBool("IsAccelerating", false);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("QuestionTrigger"))
+        {
+            GameController.Instance.QuestionTriggered = true;
+        }
+    }
 }

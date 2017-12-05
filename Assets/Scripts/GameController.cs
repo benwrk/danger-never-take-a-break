@@ -11,12 +11,11 @@ public class GameController : MonoBehaviour
     public float DifficultyMultiplier = 1.0f;
     public float AccelerationMultiplier = 1.5f;
     public float LengthDifficultyMaxMultiplier = 0.5f;
-    public float QuestionInterval = 10.0f;
     public float QuestionTime = 10.0f;
     public float QuestionPenalty = 40f;
     public float QuestionRewardMultiplier = 1000f;
 
-    private float _timeSinceLastQuestion;
+ 
     public float TimeLeftToAnswer;
 
     public float HpLeft;
@@ -32,6 +31,7 @@ public class GameController : MonoBehaviour
 
     private int _gameCounter;
     private List<Question> _unusedQuestions;
+    public bool QuestionTriggered;
 
     public enum GameState
     {
@@ -62,12 +62,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
-
-    // Update is called once per frame
-
     private void Update()
     {
         switch (State)
@@ -87,11 +81,9 @@ public class GameController : MonoBehaviour
                     ? CState.Accelerating
                     : CState.Idle;
 
-                _timeSinceLastQuestion += Time.deltaTime * GetEffectiveGameSpeed() / 15f;
-
-                if (_timeSinceLastQuestion >= QuestionInterval)
+                if (QuestionTriggered)
                 {
-                    _timeSinceLastQuestion = 0f;
+                    QuestionTriggered = false;
                     TimeLeftToAnswer = QuestionTime;
                     State = GameState.Question;
                     ActiveCanvas.SetActive(false);
@@ -156,15 +148,18 @@ public class GameController : MonoBehaviour
         HpLeft = GameLength;
         Score = 0;
         _gameCounter++;
-        _unusedQuestions = _gameCounter % 2 == 0
-            ? new List<Question>(Question.QuestionList1)
-            : new List<Question>(Question.QuestionList2);
+        //_unusedQuestions = _gameCounter % 2 == 0
+        //    ? new List<Question>(Question.QuestionList1)
+        //    : new List<Question>(Question.QuestionList2);
+        _unusedQuestions = new List<Question>(Question.QuestionList1);
+        _unusedQuestions.AddRange(Question.QuestionList2);
     }
 
     public Question GetQuestion()
     {
-        var ret = _unusedQuestions[0];
-        _unusedQuestions.RemoveAt(0);
+        var i = Random.Range(0, _unusedQuestions.Count);
+        var ret = _unusedQuestions[i];
+        _unusedQuestions.RemoveAt(i);
         return ret;
     }
 
