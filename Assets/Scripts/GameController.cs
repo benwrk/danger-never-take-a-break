@@ -11,6 +11,14 @@ public class GameController : MonoBehaviour
         Right
     }
 
+    public enum CarColor
+    {
+        Blue,
+        Green,
+        Red,
+        Yellow
+    }
+
     public enum CarState
     {
         Stop,
@@ -28,14 +36,6 @@ public class GameController : MonoBehaviour
         Question
     }
 
-    public enum CarColor
-    {
-        Blue,
-        Green, Red, Yellow
-    }
-
-    public CarColor CurrentCarColor = CarColor.Blue;
-
     public static GameController Instance;
     private float _currentAccelerateKeyChangeInterval;
 
@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour
     public float AccelerationMultiplier = 1.5f;
     public GameObject ActiveCanvas;
     public AccelerateKey CurrentAccelerateKey;
+
+    public CarColor CurrentCarColor = CarColor.Blue;
     public CarState CurrentCarState;
     public GameState CurrentGameState;
     public float DifficultyMultiplier = 1.0f;
@@ -151,8 +153,30 @@ public class GameController : MonoBehaviour
             case GameState.PreGame:
                 PreGameCanvas.SetActive(true);
                 CurrentCarState = CarState.Stop;
-                if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick 1 button 9"))
+                if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp("joystick 1 button 0"))
                 {
+                    CurrentCarColor = CarColor.Blue;
+                    PreGameCanvas.SetActive(false);
+                    Restart();
+                    CurrentGameState = GameState.Active;
+                }
+                if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp("joystick 1 button 1"))
+                {
+                    CurrentCarColor = CarColor.Green;
+                    PreGameCanvas.SetActive(false);
+                    Restart();
+                    CurrentGameState = GameState.Active;
+                }
+                if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp("joystick 1 button 2"))
+                {
+                    CurrentCarColor = CarColor.Red;
+                    PreGameCanvas.SetActive(false);
+                    Restart();
+                    CurrentGameState = GameState.Active;
+                }
+                if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp("joystick 1 button 3"))
+                {
+                    CurrentCarColor = CarColor.Yellow;
                     PreGameCanvas.SetActive(false);
                     Restart();
                     CurrentGameState = GameState.Active;
