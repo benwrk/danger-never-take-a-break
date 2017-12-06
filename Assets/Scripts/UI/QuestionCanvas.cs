@@ -53,6 +53,13 @@ namespace UI
 
             for (var i = 0; i < ChoiceTexts.Count; i++)
                 ChoiceTexts[i].text = _currentQuestion.Choices[i];
+
+            if (GameController.Instance.TimeLeftToAnswer <= 0f)
+            {
+                DeactivateImageHolder();
+                GameController.Instance.QuestionAnswered(false);
+                _questionUsed = true;
+            }
         }
 
         /// <summary>
@@ -62,13 +69,18 @@ namespace UI
         /// <param name="choiceNumber">0-indexed number of selected choice</param>
         public void HandleAnswer(int choiceNumber)
         {
+            DeactivateImageHolder();
+            GameController.Instance.QuestionAnswered(choiceNumber - 1 == _currentQuestion.CorrectChoiceIndex);
+            _questionUsed = true;
+        }
+
+        private void DeactivateImageHolder()
+        {
             if (_imageActivated)
             {
                 _activeImage.SetActive(false);
                 _imageActivated = false;
             }
-            GameController.Instance.QuestionAnswered(choiceNumber - 1 == _currentQuestion.CorrectChoiceIndex);
-            _questionUsed = true;
         }
     }
 }

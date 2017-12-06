@@ -220,8 +220,6 @@ public class GameController : MonoBehaviour
             case GameState.Question:
                 QuestionCanvas.SetActive(true);
                 TimeLeftToAnswer -= Time.deltaTime;
-                if (TimeLeftToAnswer <= 0f)
-                    QuestionAnswered(false);
                 break;
         }
     }
