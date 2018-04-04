@@ -6,7 +6,7 @@
 This Agreement, signed on Dec 6, 2017 (hereinafter: Effective Date) governs the relationship between Create Intelligence Co., Ltd., a Business Entity, (hereinafter: Licensee) and Benjapol Worakan, a private person whose principal place of business is 363/11 Soi Lat Phrao 26, Chom Phon, Chatuchak, Bangkok (hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using Danger Never Take A Break (hereinafter: The Software) created and owned by Licensor, as detailed herein
 
 ### 2. **License Grant**
-Licensor hereby grants Licensee a Sublicensable, Non-assignable & non-transferable, Pepetual, Commercial, Royalty free, Including the rights to create but not distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.
+Licensor hereby grants Licensee a Sublicensable, Non-assignable & non-transferable, Pepetual, Commercial, Royalty free, Including the rights to create and distribute derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.
 * **Limited:** Licensee may use Software for the purpose of:
   * Running Software on Licensee’s Website[s] and Server[s];
   * Allowing 3rd Parties to run Software on Licensee’s Website[s] and Server[s];
@@ -17,7 +17,7 @@ Licensor hereby grants Licensee a Sublicensable, Non-assignable & non-transferab
 * **Binary Restricted:** Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.
 * **Assignable:** Licensee may assign his rights and duties under this license as long as the party who Licensee assigns the license accepts the license in full, and provides Licensor with a written confirmation of Assignment
 * **Commercial, Royalty Free:** Licensee may use Software for any purpose, including paid-services, without any royalties
-* **Including the Right to Create Derivative Works:** Licensee may create derivative works based on Software, including amending Software’s source code, modifying it, integrating it into a larger work or removing portions of Software, as long as no distribution of the derivative works is made
+* **Including the Right to Create Derivative Works:** Licensee may create derivative works based on Software, including amending Software’s source code, modifying it, integrating it into a larger work or removing portions of Software
 
 ### 3. **Term & Termination**
 The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee’s license in the case where Licensee :
